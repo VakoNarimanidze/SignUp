@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import SignUp from "./Components/SignUp";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const setClick = () => {
+    if (email.trim() === "") {
+      alert("Please enter email");
+      return;
+    }
+    if (password.trim() === "") {
+      alert("Please enter Password");
+      return;
+    }
+    if (password.length < 8) {
+      alert("password must have at least 8 letter!");
+      return;
+    }
+    setEmail("");
+    setPassword("");
+    console.log(email);
+    console.log(password);
+  };
+
+  const form = {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    setClick,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SignUp {...form} />
+    </>
   );
 }
 
